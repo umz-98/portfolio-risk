@@ -13,3 +13,5 @@ prices = yf.download(tickers,
                      start= "2017-12-18",
                        end= "2025-12-18",)
 print(prices.head())
+
+close = prices["Close"]
