@@ -17,4 +17,5 @@ print(close.head())
 print(close.shape)
 
 returns = close.pct_change()
+returns = returns.dropna()
 print(returns.head())
