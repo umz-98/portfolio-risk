@@ -33,7 +33,7 @@ print(std_returns)
 print(returns_matrix)
 print(returns_covmatrix)
 
-weights = np.array([0.25, 0.25, 0.25, 0.25])
+weights = np.array([0.35, 0.30, 0.20, 0.15])
 portfolio_variance = np.dot(weights, np.dot(returns_covmatrix, weights))
 portfolio_volatility = portfolio_variance ** 0.5
 print(portfolio_variance)
