@@ -18,11 +18,12 @@ print(close.shape)
 
 returns = close.pct_change()
 returns = returns.dropna()
-print(returns.head())
+# print(returns.head())
+returns = returns[abs(returns["SMEA.L"]) <= 0.2 ]
+print(returns.shape)
+print(returns["SMEA.L"].describe())
 
-mean_returns = returns.mean()
+mean_returns = returns.mean()   
 std_returns = returns.std()
 print(mean_returns)
 print(std_returns)
-x = returns["SMEA.L"].describe()
-print(x)
