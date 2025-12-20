@@ -8,6 +8,8 @@
 # check for missing values
 import yfinance as yf
 import pandas as pd
+import numpy as np
+
 tickers = ["VUSA.L" , "VWRL.L" , "EMIM.L" , "SMEA.L"]
 prices = yf.download(tickers,
                      start= "2017-12-18",
@@ -20,10 +22,18 @@ returns = close.pct_change()
 returns = returns.dropna()
 # print(returns.head())
 returns = returns[abs(returns["SMEA.L"]) <= 0.2 ]
-print(returns.shape)
-print(returns["SMEA.L"].describe())
+
 
 mean_returns = returns.mean()   
 std_returns = returns.std()
+returns_matrix = returns.corr()
+retuns_covmatrix = returns.cov()
 print(mean_returns)
 print(std_returns)
+print(returns_matrix)
+print(retuns_covmatrix)
+
+
+weights = np.array([0.25, 0.25, 0.25, 0.25])
+portfolio_variance = np.dot(weights, np.dot(returns_covmatrix, weights))
+portfolio_volatility = portfolio_variance ** 0.5
