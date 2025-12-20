@@ -27,13 +27,22 @@ returns = returns[abs(returns["SMEA.L"]) <= 0.2 ]
 mean_returns = returns.mean()   
 std_returns = returns.std()
 returns_matrix = returns.corr()
-retuns_covmatrix = returns.cov()
+returns_covmatrix = returns.cov()
 print(mean_returns)
 print(std_returns)
 print(returns_matrix)
-print(retuns_covmatrix)
-
+print(returns_covmatrix)
 
 weights = np.array([0.25, 0.25, 0.25, 0.25])
 portfolio_variance = np.dot(weights, np.dot(returns_covmatrix, weights))
 portfolio_volatility = portfolio_variance ** 0.5
+print(portfolio_variance)
+
+trading_days = 252
+annual_portfolio_volatility = portfolio_volatility * (trading_days ** 0.5)
+annual_portfolio_volatility_pct = annual_portfolio_volatility * 100
+print(annual_portfolio_volatility_pct)
+
+portfolio_expected_return = np.dot(mean_returns, weights)
+annual_portfolio_exp_return_pct = portfolio_expected_return * trading_days * 100
+print(annual_portfolio_exp_return_pct)
