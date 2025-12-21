@@ -10,18 +10,20 @@ import yfinance as yf
 import pandas as pd
 import numpy as np
 
-tickers = ["VUSA.L" , "VWRL.L" , "EMIM.L" , "SMEA.L"]
+tickers = ["AGBP.L", "VWRL.L"]
 prices = yf.download(tickers,
-                     start= "2017-12-18",
-                       end= "2025-12-18",)
+                     start= "2019-06-20",
+                       end= "2025-12-21",)
 close = prices["Close"]
 print(close.head()) 
 print(close.shape)
 # Upgrade to auto-dates later this allows continous monitoring.
 
-returns = close.pct_change()
+returns = close.pct_change(fill_method=None)
 returns = returns.dropna()
-returns = returns[abs(returns["SMEA.L"]) <= 0.2 ]
+returns_filtered = returns[(returns.abs() <= 0.2).all(axis=1)]
+
+
 # For future purposes the manual cleaning (like removing outliers) those rules still apply, 
 # but the rows affected may change depending on the new period.
 
@@ -34,7 +36,7 @@ print(std_returns)
 print(returns_matrix)
 print(returns_covmatrix)
 
-weights = np.array([0.20, 0.20, 0.40, 0.20])
+weights = np.array([0.1, 0.9])
 portfolio_variance = np.dot(weights, np.dot(returns_covmatrix, weights))
 portfolio_volatility = portfolio_variance ** 0.5
 print(portfolio_variance)
@@ -47,3 +49,6 @@ print(annual_portfolio_volatility_pct)
 portfolio_expected_return = np.dot(mean_returns, weights)
 annual_portfolio_exp_return_pct = portfolio_expected_return * trading_days * 100
 print(annual_portfolio_exp_return_pct)
+
+## print(returns.columns)
+## print(weights, weights.sum())
