@@ -10,7 +10,7 @@ import yfinance as yf
 import pandas as pd
 import numpy as np
 
-tickers = ["VAGS.L", "VWRL.L"]
+tickers = ["VAGS.L", "VWRL.L", "EMIM.L"]
 prices = yf.download(tickers,
                      start= "2019-06-20",
                        end= "2025-12-21",)
@@ -36,7 +36,7 @@ print(std_returns)
 print(returns_matrix)
 print(returns_covmatrix)
 
-weights = np.array([0.2, 0.8])
+weights = np.array([0.2, 0.65, 0.15])
 portfolio_variance = np.dot(weights, np.dot(returns_covmatrix, weights))
 portfolio_volatility = portfolio_variance ** 0.5
 print(portfolio_variance)
