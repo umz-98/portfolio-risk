@@ -10,7 +10,7 @@ import yfinance as yf
 import pandas as pd
 import numpy as np
 
-tickers = ["AGBP.L", "VWRL.L"]
+tickers = ["VAGS.L", "VWRL.L"]
 prices = yf.download(tickers,
                      start= "2019-06-20",
                        end= "2025-12-21",)
@@ -36,7 +36,7 @@ print(std_returns)
 print(returns_matrix)
 print(returns_covmatrix)
 
-weights = np.array([0.1, 0.9])
+weights = np.array([0.2, 0.8])
 portfolio_variance = np.dot(weights, np.dot(returns_covmatrix, weights))
 portfolio_volatility = portfolio_variance ** 0.5
 print(portfolio_variance)
@@ -49,6 +49,10 @@ print(annual_portfolio_volatility_pct)
 portfolio_expected_return = np.dot(mean_returns, weights)
 annual_portfolio_exp_return_pct = portfolio_expected_return * trading_days * 100
 print(annual_portfolio_exp_return_pct)
+
+sharpe_ratio = portfolio_expected_return / portfolio_volatility
+print(sharpe_ratio)
+
 
 ## print(returns.columns)
 ## print(weights, weights.sum())
