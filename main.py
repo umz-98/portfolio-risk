@@ -17,12 +17,13 @@ prices = yf.download(tickers,
 close = prices["Close"]
 print(close.head()) 
 print(close.shape)
+# Upgrade to auto-dates later this allows continous monitoring.
 
 returns = close.pct_change()
 returns = returns.dropna()
-# print(returns.head())
 returns = returns[abs(returns["SMEA.L"]) <= 0.2 ]
-
+# For future purposes the manual cleaning (like removing outliers) those rules still apply, 
+# but the rows affected may change depending on the new period.
 
 mean_returns = returns.mean()   
 std_returns = returns.std()
