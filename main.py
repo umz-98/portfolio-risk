@@ -54,5 +54,5 @@ sharpe_ratio = portfolio_expected_return / portfolio_volatility
 print(sharpe_ratio)
 
 
-# print(returns.columns)
-# print(weights, weights.sum())
+print(returns.columns)
+print(weights, weights.sum())
