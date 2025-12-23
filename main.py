@@ -57,8 +57,15 @@ sharpe_ratio = portfolio_expected_return / portfolio_volatility
 portfolio_return = returns_filtered @ weights
 cumulative_returns = (1 + portfolio_return).cumprod()
 running_max = cumulative_returns.cummax()
-print(cumulative_returns.head())
-print(running_max.head())
+drawdown = (cumulative_returns - running_max) / running_max
+#print(cumulative_returns.head())
+#print(running_max.head())
+#print(drawdown.head())
+
+# max drawdown below
+max_drawdown = drawdown.min()
+print(max_drawdown)
+
 
 
 # print(returns.columns)
