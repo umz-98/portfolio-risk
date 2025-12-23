@@ -15,8 +15,8 @@ prices = yf.download(tickers,
                      start= "2019-06-20",
                        end= "2025-12-21",)
 close = prices["Close"]
-print(close.head()) 
-print(close.shape)
+#print(close.head()) 
+#print(close.shape)
 # Upgrade to auto-dates later this allows continous monitoring.
 
 returns = close.pct_change(fill_method=None)
@@ -31,28 +31,35 @@ mean_returns = returns.mean()
 std_returns = returns.std()
 returns_matrix = returns.corr()
 returns_covmatrix = returns.cov()
-print(mean_returns)
-print(std_returns)
-print(returns_matrix)
-print(returns_covmatrix)
+#print(mean_returns)
+#print(std_returns)
+#print(returns_matrix)
+# print(returns_covmatrix)
 
 weights = np.array([0.20, 0.80])
 portfolio_variance = np.dot(weights, np.dot(returns_covmatrix, weights))
 portfolio_volatility = portfolio_variance ** 0.5
-print(portfolio_variance)
+# print(portfolio_volatility)
 
 trading_days = 252
 annual_portfolio_volatility = portfolio_volatility * (trading_days ** 0.5)
 annual_portfolio_volatility_pct = annual_portfolio_volatility * 100
-print(annual_portfolio_volatility_pct)
+# print(annual_portfolio_volatility_pct)
 
 portfolio_expected_return = np.dot(mean_returns, weights)
 annual_portfolio_exp_return_pct = portfolio_expected_return * trading_days * 100
-print(annual_portfolio_exp_return_pct)
+# print(annual_portfolio_exp_return_pct)
 
 sharpe_ratio = portfolio_expected_return / portfolio_volatility
-print(sharpe_ratio)
+# print(sharpe_ratio)
+
+# Drawdown calculaitons
+portfolio_return = returns_filtered @ weights
+cumulative_returns = (1 + portfolio_return).cumprod()
+running_max = cumulative_returns.cummax()
+print(cumulative_returns.head())
+print(running_max.head())
 
 
-print(returns.columns)
-print(weights, weights.sum())
+# print(returns.columns)
+# print(weights, weights.sum())
