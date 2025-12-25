@@ -62,7 +62,7 @@ drawdown = (cumulative_returns - running_max) / running_max
 
 # max drawdown below
 max_drawdown = drawdown.min()
-print(max_drawdown)
+# print(max_drawdown)
 trough_date = drawdown.idxmin()
 x= cumulative_returns.loc[:trough_date].idxmax()
 # print(x)
@@ -74,8 +74,15 @@ tail_losses = portfolio_return[portfolio_return <= var_5]
 es_5 = tail_losses.mean()
 # print(es_5)
 y = var_5 * 100
-print(y)
+# print(y)
 z = es_5 * 100
-print(z)
+# print(z)
+
+# CAPM
+market_return = returns["VWRL.L"]
+asset_return = returns["VAGS.L"]
+beta = asset_return.cov(market_return) / market_return.var()
+print(beta)
+
 # print(returns.columns)
 # print(weights, weights.sum())
