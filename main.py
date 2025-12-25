@@ -1,8 +1,6 @@
 # define ETF tickers
-# VUSA.L  -> US equities (S&P 500)
 # VWRL.L  -> Global equities
 # EMIM.L  -> Emerging market equities
-# SMEA.L  ->  European equity
 # set date range
 # download price data
 # check for missing values
@@ -54,19 +52,30 @@ sharpe_ratio = portfolio_expected_return / portfolio_volatility
 # print(sharpe_ratio)
 
 # Drawdown calculaitons
-portfolio_return = returns_filtered @ weights
+portfolio_return = returns @ weights
 cumulative_returns = (1 + portfolio_return).cumprod()
 running_max = cumulative_returns.cummax()
 drawdown = (cumulative_returns - running_max) / running_max
 #print(cumulative_returns.head())
-#print(running_max.head())
-#print(drawdown.head())
+# print(running_max.head())
+# print(drawdown.head())
 
 # max drawdown below
 max_drawdown = drawdown.min()
 print(max_drawdown)
+trough_date = drawdown.idxmin()
+x= cumulative_returns.loc[:trough_date].idxmax()
+# print(x)
 
-
-
+# Expected shortfall
+var_5 = portfolio_return.quantile(0.05)
+# print(var_5)
+tail_losses = portfolio_return[portfolio_return <= var_5]
+es_5 = tail_losses.mean()
+# print(es_5)
+y = var_5 * 100
+print(y)
+z = es_5 * 100
+print(z)
 # print(returns.columns)
 # print(weights, weights.sum())
