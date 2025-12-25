@@ -68,6 +68,14 @@ For each asset and portfolio combination, the following were calculated:
 
 This portfolio offers strong diversification, controlled volatility, and robust long-term growth characteristics.
 
+## Risk Analysis
+
+- Maximum Drawdown: −20.9%
+
+- VaR (95%, daily): −1.17%
+
+- Expected Shortfall (5%, daily): −1.83%
+
 ## Tools & Architecture
 
 - Python (pandas, numpy, yfinance) for all core analysis
