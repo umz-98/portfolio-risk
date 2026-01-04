@@ -83,6 +83,15 @@ market_return = returns["VWRL.L"]
 asset_return = returns["VAGS.L"]
 beta = asset_return.cov(market_return) / market_return.var()
 print(beta)
+E_Rm_daily = market_return.mean()
+E_Rm_annual = (1 + E_Rm_daily) ** trading_days - 1
+print(E_Rm_annual)
+Rf_annual = 0.03
+capm = Rf_annual + beta * (E_Rm_annual - Rf_annual)
+print(capm)
+
+returns.to_csv("returns.csv")
+
 
 # print(returns.columns)
 # print(weights, weights.sum())
